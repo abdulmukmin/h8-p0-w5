@@ -1,60 +1,38 @@
 function highestScore (students) {
     
-    //console.log(students[0].name) //-> menampilkan value objek name di index 0
-    //console.log(students[0].score) //-> menampilkan value objek score di index 0
-    //console.log(students[0].class) //-> menampilkan value objek class di index 0
+    // console.log(students[0].name) //-> menampilkan value objek name di index 0
+    // console.log(students[0].score) //-> menampilkan value objek score di index 0
+    // console.log(students[0].class) //-> menampilkan value objek class di index 0
     /*
-    1.set 'foxesTertinggi' dengan name dan score 0,
-    looping value class di setiap index, bila ditemukan index dengan class 'foxes' maka bandingkan scorenya dengan 'foxesTertinggi',
-    jika score 'foxesTertinggi' lebih kecil dari score foxes saat ini, maka isikan name dan score foxes saat ini ke 'foxesTertinggi'.
-
-    2.set 'wolvesTertinggi' dengan name dan score 0,
-    looping value class di setiap index, bila ditemukan index dengan class 'wolves' maka bandingkan scorenya dengan 'wolvesTertinggi',
-    jika score 'wolvesTertinggi' lebih kecil dari score wolves saat ini, maka isikan name dan score wolves saat ini ke 'wolvesTertinggi'.
-    
-    3.set 'tigersTertinggi' dengan name dan score 0,
-    looping value class di setiap index, bila ditemukan index dengan class 'tigers' maka bandingkan scorenya dengan 'tigersTertinggi',
-    jika score 'tigersTertinggi' lebih kecil dari score tigers saat ini, maka isikan name dan score tigers saat ini ke 'tigersTertinggi'.
+    1.buat result output berupa objek kosong, akan kita isi untuk menampung hasilnya nanti
+    2.looping setiap class dari 'students' dan filter score tertinggi untuk dimasukkan menjadi value dari class tersebut
     */
-
-    var foxesTertinggi={name:'Kosong',score:0}
-    var wolvesTertinggi={name:'Kosong',score:0}
-    var tigersTertinggi={name:'Kosong',score:0}
+    var output={} 
+    //console.log(students.length)
+    if (students.length===0){
+        return output
+    }
     for (i=0; i<students.length; i++){
-        if (students[i].class==='foxes'){ //->kondisi perbandingan foxes
-            if (foxesTertinggi.score < students[i].score){ //-> bandingkan score
-                foxesTertinggi.name=students[i].name
-                foxesTertinggi.score=students[i].score
-            }
+        //buat key dari classnya dulu
+        //buat value key sesuai yang diinginkan
+        var scoreTertinggi=students[i].score
+        var setClass=students[i].class
+        var isiClass={
+            name:students[i].name,
+            score:students[i].score
         }
-        if (students[i].class==='wolves'){ //->kondisi perbandingan wolves
-            if (wolvesTertinggi.score < students[i].score){ //-> bandingkan score
-                wolvesTertinggi.name=students[i].name
-                wolvesTertinggi.score=students[i].score
-            }
+        // var scoreTertinggi=students[i].score
+        // console.log(scoreTertinggi)
+        
+        if(output[setClass]===undefined){ //-> di set hanya kalo class belum ada jadi hanya dapat nilai pertama
+            output[setClass]=isiClass
         }
-        if (students[i].class==='tigers'){ //->kondisi perbandingan tigers
-            if (tigersTertinggi.score < students[i].score){ //-> bandingkan score
-                tigersTertinggi.name=students[i].name
-                tigersTertinggi.score=students[i].score
-            }
+        //filter isian key sesuai yang terbesar
+        if(output[setClass]['score']<students[i].score){
+            output[setClass]=isiClass
         }
     }
-    var result = {
-        foxes:foxesTertinggi,
-        wolves:wolvesTertinggi,
-        tigers:tigersTertinggi
-    }
-    if (tigersTertinggi.score===0){
-        delete result.tigers
-    }
-    if (wolvesTertinggi.score===0){
-        delete result.wolves
-    }
-    if (foxesTertinggi.score===0){
-        delete result.foxes
-    }
-    return result //-> test terakhir saat objek kosong karena isi result sudah dihapus saat foxes, wolves & tigers kosong lalu didelete
+    return output
   }
   
   // TEST CASE
@@ -79,7 +57,7 @@ function highestScore (students) {
       score: 78,
       class: 'wolves'
     }
-  ]));
+  ])); 
   
   // {
   //   foxes: { name: 'Dimitri', score: 90 },
@@ -121,4 +99,4 @@ function highestScore (students) {
   // }
   
   
-  console.log(highestScore([])); //{}
+  //console.log(highestScore([])); //{}
