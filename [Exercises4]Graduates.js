@@ -1,47 +1,29 @@
 function graduates (students) {
-    //buat kondisi untuk penilaian didalam loping, kalo misal lulus maka di push ke dalam 'output'
-    //console.log(students[0].score) //-> melihat score
+    /*
+    buat objek kosong untuk menampung hasil dengan key dari 'class'
+    filter berdasarkan score, bila score lebih besar dari 75, maka push sebagai value dari key tersebut
+    */
     var output ={}
-    output = {
-      foxes   :[],
-      wolves  :[],
-      tigers  :[]
+    if (students.length===0){
+        return output
     }
-    //console.log(output.foxes)
+    console.log(students[0]['class'])//mencari class berdasarkan index 0
     for (i=0; i<students.length; i++){
-        if (students[i].score > 75){
-          if( students[i].class==='foxes'){
-             output.foxes.push({
-               name: students[i].name, 
-               score: students[i].score
-             })
-          }
-          else if( students[i].class==='wolves'){
-            output.wolves.push({
-              name: students[i].name, 
-              score: students[i].score              
-            })
-          }
-          else if ( students[i].class==='tigers'){
-            output.tigers.push({
-              name: students[i].name, 
-              score: students[i].score              
-            })
-          }
+        var setClass = students[i]['class']
+        var isiClass = {
+            name    :students[i]['name'],
+            score   :students[i]['score']
         }
-    }
-    //console.log()
-    if (output.tigers[0]===undefined){
-      delete output.tigers
-    } 
-    if (output.wolves[0]===undefined){
-      delete output.wolves
-    } 
-    if (output.foxes[0]===undefined){
-      delete output.foxes
-    }
-    return (output)
-
+        //filter
+        if(output[setClass]===undefined){
+            output[setClass]=[]          
+        }
+        if(students[i]['score']>75){
+            output[setClass].push(isiClass)
+        }
+   }
+   
+   return output
 }
   
   console.log(graduates([
@@ -77,7 +59,7 @@ function graduates (students) {
   //   ]
   // }
   
-  console.log(graduates([
+ /* console.log(graduates([
     {
       name: 'Alexander',
       score: 100,
@@ -118,5 +100,6 @@ function graduates (students) {
   //   ]
   // }
   
-  
+  */
   console.log(graduates([])); //{}
+  
